@@ -1,0 +1,21 @@
+{
+  "files": {
+    "main.css": "/static/css/main.d90bcb71.chunk.css",
+    "main.js": "/static/js/main.d30e6ecf.chunk.js",
+    "main.js.map": "/static/js/main.d30e6ecf.chunk.js.map",
+    "runtime-main.js": "/static/js/runtime-main.32aae409.js",
+    "runtime-main.js.map": "/static/js/runtime-main.32aae409.js.map",
+    "static/js/2.8f5ef8d9.chunk.js": "/static/js/2.8f5ef8d9.chunk.js",
+    "static/js/2.8f5ef8d9.chunk.js.map": "/static/js/2.8f5ef8d9.chunk.js.map",
+    "index.html": "/index.html",
+    "static/css/main.d90bcb71.chunk.css.map": "/static/css/main.d90bcb71.chunk.css.map",
+    "static/js/2.8f5ef8d9.chunk.js.LICENSE.txt": "/static/js/2.8f5ef8d9.chunk.js.LICENSE.txt",
+    "static/media/DeIKLogo.2f5451ff.png": "/static/media/DeIKLogo.2f5451ff.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.32aae409.js",
+    "static/js/2.8f5ef8d9.chunk.js",
+    "static/css/main.d90bcb71.chunk.css",
+    "static/js/main.d30e6ecf.chunk.js"
+  ]
+}

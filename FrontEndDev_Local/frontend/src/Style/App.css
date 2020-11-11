@@ -1,0 +1,250 @@
+.nav-area{
+    font-family: Arial, Helvetica, sans-serif;
+}
+.nav-area ul{
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.CheckBoxUser{
+  cursor: pointer;
+  }
+
+.nav-area ul li{
+    flex: 1 1 0;
+}
+
+.info-titleuser{
+  width: 100%;
+  display: block;
+  font-weight: bold;
+  font-size: 30px;
+  text-align: center;
+}
+
+.flex-outer li
+{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+}
+.flex-outer > li > label,
+.flex-outer li p {
+  flex: 1 0 120px;
+  max-width: 220px;
+}
+ 
+.flex-outer > li > label + * {
+  flex: 1 0 220px;
+}
+.flex-outer li button {
+    margin-left: auto;
+    padding: 8px 16px;
+    border: none;
+    background: #333;
+    color: #f2f2f2;
+    margin-top: 10px;
+    text-transform: uppercase;
+    letter-spacing: .09em;
+    border-radius: 2px;
+  }
+
+.submitbutton:hover {
+        background-color: #18972e;
+        color: white;
+        cursor: pointer;
+}
+
+.navnone1{   
+text-transform: uppercase;
+display: block;
+background: #252525;
+padding: 15px;
+color: #fff;
+text-decoration: none;
+text-align: center;
+}
+
+.nav-area a{ 
+    height: 100%;  
+    text-transform: uppercase;
+    display: block;
+    background: #252525;
+    padding: 15px;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+}
+
+.nav-area a:hover{
+    background: #18972e;
+    color: #fff;
+}
+
+
+.targy{
+    width: 70%;
+    margin: auto;
+    display: flex;
+    flex-direction: column;
+   
+}
+
+.inputs{
+    display: flex;
+    justify-content: center;
+}
+.tables{
+    
+    display: flex;
+    justify-content: center;
+
+}
+.content-table{
+    border-collapse:collapse;
+    width: 100%;
+}
+.content-table td,.content-table th{
+    padding: 12px 15px;
+    border: 1px solid  #ddd;
+    text-align: center;
+}
+
+.content-table th{
+    background-color: #252525;
+    color: white;
+}
+
+.dropdownnav {
+    background: #252525;
+    height: 100%;
+    overflow: hidden;
+  }
+  
+.dropdownnav .dropbtnnav {
+    padding: 15px;
+    font-size: 15px;  
+    text-transform: uppercase;
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    color: white;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+  }
+  
+.dropdown-contentnav {
+    display: none;
+    position: absolute;
+    width: 26%;
+    max-width: 100%;
+    min-width: 100px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+  }
+  
+.dropdown-contentnav a {
+    float: none;
+    color: white;
+    background-color: #252525;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+    text-align: left;
+  }
+  
+  .dropdown-contentnav a:hover {
+    background-color: #18972e;
+  }
+  
+  .dropdownnav:hover .dropdown-contentnav {
+    display: block;
+  }
+
+  .logoutbtn-wrap{
+    background: #252525;
+    height: 100%;
+    overflow: hidden;
+  }
+
+  .logoutbtn{
+    cursor: pointer;
+    padding: 15px;
+    font-size: 15px;  
+    text-transform: uppercase;
+    width: 100%;
+    height: 100%;
+    border: none;
+    outline: none;
+    color: white;
+    background-color: inherit;
+    font-family: inherit;
+    margin: 0;
+  }
+
+  .logoutbtn:hover {
+    background: #18972e;
+  }
+  
+
+  @media (max-width:600px){
+    .nav-area ul li{
+        width: 100%;
+    }
+.dropdown-contentnav a{
+    height: 100%;
+    text-transform: uppercase;
+    display: block;
+    background: #585858;
+    padding: 15px;
+    color: #fff;
+    text-decoration: none;
+    text-align: center;
+}    
+    .kekselect{
+      width: 50%;
+    }
+    .content-table thead{
+        display: none;
+    }
+    .content-table, .content-table tbody, .content-table tr, .content-table td{
+        display: block;
+        width: 100%;
+    }
+    .content-table tr{
+        margin-bottom: 15px;
+    }
+    .content-table td{
+        text-align: right;
+        text-align: right;
+        position: relative;
+    }
+
+    .content-table td::before{
+        content: attr(data-label);
+        position: absolute;
+        left: 0;
+        width: 50%;
+        padding-left: 15px;
+        font-size: 15px;
+        font-weight: bold;
+        text-align: left;
+    }
+
+    .nav-area ul li{
+        flex: auto;
+    }
+    
+    .dropdown-contentnav {
+        width: 100%;
+    }
+
+    .dropdown-contentnav a{
+        text-align: center;
+       }
+}
