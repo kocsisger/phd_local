@@ -48,7 +48,7 @@ router.post('/', async (req,res)=>{
     Tisztelt ${post.oktato}!<br><br>
     ${Student.lastname} ${Student.firstname} Kérvényezte a(z) ${post.targy} tárgy felvételének elfogadását.<br>
     A nyilatkozattételt megteheti az alábbi linken.
-    <p>http://phd.inf.unideb.hu/subjectupdate?uid=${post.user}&pid=${post._id}&aid=${TName._id}&key=${Key.key}</p>`  
+    <p>http://localhost:3000/subjectupdate?uid=${post.user}&pid=${post._id}&aid=${TName._id}&key=${Key.key}</p>`  
     const Subject = "Tárgyfelvétel";
     SendEmail(url,TName.TeacherEmail, Subject);
     const urlS=`
