@@ -17,6 +17,7 @@ class PostUserAdministration extends Component{
             coursetype:'',
             semester:'',
             programdirector:'',
+	    supervisorID:'',
             edit:false,
             delete:false,
             deletefirstname:'',
@@ -54,7 +55,8 @@ class PostUserAdministration extends Component{
     SubmitChangeHandlerForSupervisor = (teacherId) =>{
             const selectedTeacher = this.props.teachernames.find(teacher => teacher._id === teacherId)
             this.setState({
-                supervisor: selectedTeacher.TeacherName                
+                supervisor: selectedTeacher.TeacherName,
+		supervisorID: selectedTeacher._id
             })         
         }
 
