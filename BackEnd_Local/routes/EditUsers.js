@@ -22,7 +22,7 @@ router.post('/', async (req,res)=>{
             try {
                  var myquery = { _id: User._id};
                     var newvalues = { $set: { firstname: req.body.firstname,lastname:req.body.lastname,email:req.body.email,
-                    phonenumber:req.body.phonenumber,neptuncode:req.body.neptuncode,supervisor:req.body.supervisor,doctoralprogram:req.body.doctoralprogram,
+                    phonenumber:req.body.phonenumber,neptuncode:req.body.neptuncode,supervisor:req.body.supervisor,supervisorID:req.body.supervisorID,doctoralprogram:req.body.doctoralprogram,
                     coursetype:req.body.coursetype,semester:req.body.semester,programdirector:req.body.programdirector} };
 
                        db.collection("users").updateOne(myquery, newvalues, function(err, res) {
