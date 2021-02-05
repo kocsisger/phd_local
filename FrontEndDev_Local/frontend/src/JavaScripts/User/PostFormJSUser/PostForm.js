@@ -31,7 +31,6 @@ class PostForm extends Component {
 
     }
 
-
     SubmitChangeHandler = (targyId) => {
         if (this.state.checked) {
             this.setState({
@@ -94,29 +93,15 @@ class PostForm extends Component {
 
 
     SubmitHandler = e => {
-        var x = false;
-        this.props.items.forEach(element => {
-            if (element.targy === this.state.targy && element.oktato === this.state.oktato) {
-                x = true
-            }
-        });
-        if (x === true) {
-            window.alert("This subject already exists")
-        }
-        else {
             e.preventDefault()
-
             axios.post('http://localhost:50111/api/posts', this.state)
-
                 .then(response => {
                     this.props.onPostSubmit(response.data)
-                    
+                    window.alert("Successful subject registration!")
                 })
                 .catch(error => {
-                    console.log(error)
+                    window.alert("This subject already exists!")
                 })
-        }
-
     }
 
     render() {
