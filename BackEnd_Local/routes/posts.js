@@ -32,39 +32,44 @@ router.post('/', async (req,res)=>{
         targy: req.body.targy,
         oktato: req.body.oktato,
     });
+
     try{
-    const savedPost = await post.save();
-    
-    
-    const Key = new PostKey({
-        postid:savedPost._id,
-        key:Str.random(20),
-    });
+        var currdate = new Date()
+        currdate.getMonth()>8? currdate.setMonth(8):currdate.getMonth()<1?currdate.setMonth(-3):currdate.setMonth(1)
+        currdate.setDate(0)
+        const incomingPost = await Post.findOne({oktato:post.oktato,user:post.user,targy:post.targy,date: { $gte: currdate}});
+        if(incomingPost === null){
+            const savedPost = await post.save();
+            const Key = new PostKey({
+                postid:savedPost._id,
+                key:Str.random(20),
+            });
 
-    const TName = await NAE.findOne({TeacherName:post.oktato})
-    const Student = await USERS.findOne({_id:post.user})
-    Key.save();
-    const url=`
-    Tisztelt ${post.oktato}!<br><br>
-    ${Student.lastname} ${Student.firstname} Kérvényezte a(z) ${post.targy} tárgy felvételének elfogadását.<br>
-    A nyilatkozattételt megteheti az alábbi linken.
-    <p>http://localhost:3000/subjectupdate?uid=${post.user}&pid=${post._id}&aid=${TName._id}&key=${Key.key}</p>`  
-    const Subject = "Tárgyfelvétel";
-    SendEmail(url,TName.TeacherEmail, Subject);
-    const urlS=`
-    Tisztelt ${Student.supervisor}!<br><br>
-    Ezúton tájékoztatjuk, hogy ${Student.lastname} ${Student.firstname} hallgató, az ön témavezetettje felvételre jelölte a ${post.oktato} oktató, ${post.targy} című tárgyát.<br>
-    Ez a levél csak tájékoztatás jellegű, az adminisztrációval kapcsolatban önnek nincs teendője.<br>
-    ------------------------------------------------------------------------------------------------
-    `
-
-    const supervisorname = await NAE.findOne({_id:Student.supervisorID});
-    const SubjectS = "Témavezető értesítés";
-    SendEmail(urlS,supervisorname.TeacherEmail, SubjectS);
-
-    res.json(savedPost);
+            const TName = await NAE.findOne({TeacherName:post.oktato})
+            const Student = await USERS.findOne({_id:post.user})
+            Key.save();
+            const url=`
+            Tisztelt ${post.oktato}!<br><br>
+            ${Student.lastname} ${Student.firstname} Kérvényezte a(z) ${post.targy} tárgy felvételének elfogadását.<br>
+            A nyilatkozattételt megteheti az alábbi linken.
+            <p>http://localhost:3000/subjectupdate?uid=${post.user}&pid=${post._id}&aid=${TName._id}&key=${Key.key}</p>`  
+            const Subject = "Tárgyfelvétel";
+            SendEmail(url,TName.TeacherEmail, Subject);
+            const urlS=`
+            Tisztelt ${Student.supervisor}!<br><br>
+            Ezúton tájékoztatjuk, hogy ${Student.lastname} ${Student.firstname} hallgató, az ön témavezetettje felvételre jelölte a ${post.oktato} oktató, ${post.targy} című tárgyát.<br>
+            Ez a levél csak tájékoztatás jellegű, az adminisztrációval kapcsolatban önnek nincs teendője.<br>
+            ------------------------------------------------------------------------------------------------
+            `
+            const supervisorname = await NAE.findOne({_id:Student.supervisorID});
+            const SubjectS = "Témavezető értesítés";
+            SendEmail(urlS,supervisorname.TeacherEmail, SubjectS);
+            res.json(savedPost);
+        } else {
+            throw 'This subject already exists';
+        }
     }catch(err){
-        res.json({message:err});
+        res.status(500).send({message:err})
     }    
 });
 
