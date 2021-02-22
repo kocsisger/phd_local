@@ -11,6 +11,7 @@ const SendEmail = require('./EmailSender');
 const NAE =require('../models/NameAndEmail');
 const USERS =require('../models/Users');
 const mongoose = require('mongoose');
+const semester = require('../models/Semester');
 const db = mongoose.connection;
 
 
@@ -34,18 +35,17 @@ router.post('/', async (req,res)=>{
     });
 
     try{
-        var currdate = new Date()
-        currdate.getMonth()>8? currdate.setMonth(8):currdate.getMonth()<1?currdate.setMonth(-3):currdate.setMonth(1)
-        currdate.setDate(0)
-        const incomingPost = await Post.findOne({oktato:post.oktato,user:post.user,targy:post.targy,date: { $gte: currdate}});
-        if(incomingPost === null){
+        const sem = await semester.findOne();
+        var semStartDate = new Date(sem.startDate);
+        const incomingPost = await Post.findOne({oktato:post.oktato,user:post.user,targy:post.targy,date: { $gte: semStartDate}});
+        const TName = await NAE.findOne({TeacherName:post.oktato})
+        if(incomingPost === null && TName !== null){
             const savedPost = await post.save();
             const Key = new PostKey({
                 postid:savedPost._id,
                 key:Str.random(20),
             });
 
-            const TName = await NAE.findOne({TeacherName:post.oktato})
             const Student = await USERS.findOne({_id:post.user})
             Key.save();
             const url=`
@@ -66,21 +66,20 @@ router.post('/', async (req,res)=>{
             SendEmail(urlS,supervisorname.TeacherEmail, SubjectS);
             res.json(savedPost);
         } else {
-            throw 'This subject already exists';
+            throw 'Subject Registration Error!';
         }
     }catch(err){
-        res.status(500).send({message:err})
+        res.status(422).send({message:err})
     }    
 });
 
 
 //specific post
 router.get('/:user',async (req,res)=>{
-    var currdate = new Date()    
-    currdate.getMonth()>8? currdate.setMonth(8):currdate.getMonth()<1?currdate.setMonth(-3):currdate.setMonth(1)
-    currdate.setDate(0)
+    const sem = await semester.findOne();
+    var semStartDate = new Date(sem.startDate);
     try{
-    const post = await Post.find({ user: req.params.user,date: { $gt: currdate}})
+    const post = await Post.find({ user: req.params.user,date: { $gt: semStartDate}})
     res.json(post);
     }catch(err){
         res.json({message:err});
@@ -145,12 +144,10 @@ router.get('/:user/:postId', async (req,res)=> {
 });
 
 router.get('/:user/history/h',async (req,res)=>{
-    var currdate = new Date()
-    //currdate.setMonth(currdate.getMonth()>8? currdate.getMonth()-(currdate.getMonth()-8):currdate.getMonth()<1 ?currdate.getMonth()-(currdate.getMonth()-3):currdate.getMonth()-3 )
-    currdate.getMonth()>8? currdate.setMonth(8):currdate.getMonth()<1?currdate.setMonth(-3):currdate.setMonth(1)
-    currdate.setDate(0)
+    const sem = await semester.findOne();
+    var semStartDate = new Date(sem.startDate);
     try{
-    const post = await Post.find({ user: req.params.user,date: { $lte: currdate}})
+    const post = await Post.find({ user: req.params.user,date: { $lte: semStartDate}});
     res.json(post);
     }catch(err){
         res.json({message:err});

@@ -39,7 +39,7 @@ router.post('/', async (req,res)=>{
 	supervisorID:req.body.supervisorID,
         doctoralprogram:req.body.doctoralprogram,
         coursetype:req.body.coursetype,
-        semester:req.body.semester,
+        semester:Number(req.body.semester),
         programdirector:req.body.programdirector,
         username:username[0],
         pass:hashedPass,

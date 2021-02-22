@@ -39,6 +39,7 @@ const GetGenNewAdminPassRoute = require('./routes/GenNewAdminPass');
 const GetAdministratePostRoute = require('./routes/AdminstratePost');
 const GetSubjectUpdateRoute = require('./routes/subjectupdate');
 const GetAllUserwithPendingSubject = require('./routes/Pending');
+const GetEditSemesterRoute = require('./routes/EditSemester');
 
 var cors= require('cors');
 app.use(helmet());
@@ -80,8 +81,7 @@ app.use('/api/gennewpassforadmin',GetGenNewAdminPassRoute);
 app.use('/api/PostAdministrate',GetAdministratePostRoute);
 app.use('/api/subjectupdate',GetSubjectUpdateRoute);
 app.use('/api/getpendingusers',GetAllUserwithPendingSubject);
-
-mongoose.set('useCreateIndex', true);
+app.use('/api/editsemester',GetEditSemesterRoute);
 mongoose.connect(process.env.DB_CONNECTION, { useNewUrlParser: true,useUnifiedTopology: true });
 
 const db = mongoose.connection

@@ -120,7 +120,7 @@ router.post('/pending/resend', async (req,res)=>{
     Tisztelt ${post.oktato}!<br><br>
     Tisztelettel szeretnénk emlékeztetni, hogy  ${Student.lastname} ${Student.firstname} PhD hallgató nemrégiban kérvényezte a(z)  ${post.targy} tárgy elfogadását neptunban történő felvételre.<br>
     Kérjük tegye meg a nyilatkozatát az alábbi linken:
-    <p>http://phd.inf.unideb.hu/subjectupdate?uid=${post.user}&pid=${post._id}&aid=${TName._id}&key=${Key.key}</p>`  
+    <p>http://localhost:3000/subjectupdate?uid=${post.user}&pid=${post._id}&aid=${TName._id}&key=${Key.key}</p>`  
     const Subject = "Tárgyfelvétel emlékeztető";
     SendEmail(url,TName.TeacherEmail, Subject);
     res.json("Successfully Email resend");

@@ -40,7 +40,7 @@ router.post('/', async (req,res)=>{
                         <ul>  
                           <li>${pass}</li>
                         </ul>
-                       <h3>You can login at: http://phd.inf.unideb.hu/userlogin.</h3>`;
+                       <h3>You can login at: http://localhost:3000/userlogin.</h3>`;
                        const subject = 'New password for Doctoral School!';
                        SendEmail(output,User.email,subject);
                        res.send("Successfully Change Pass!")
