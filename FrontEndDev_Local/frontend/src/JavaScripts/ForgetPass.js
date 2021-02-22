@@ -24,8 +24,7 @@ function ForgetPass() {
                     </li>
                  </ul>
                  <br/>
-                    <span className="ititle"> Email:  admin@inf.unideb.hu</span>
-                    <span className="ititle"> Phone:  +361111111</span>
+                    <span className="ititle"> Email:  kocsis.gergely@inf.unideb.hu</span>
                     <br/>
             </div>
 		</div>

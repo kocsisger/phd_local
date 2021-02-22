@@ -109,6 +109,10 @@ label {
   background-color: #BEBEBE;
 }
 
+img {
+  pointer-events: none;
+}
+
 
 .input{
   outline: none;

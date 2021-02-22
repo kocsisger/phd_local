@@ -11,12 +11,12 @@ class PostForm extends Component {
             targy: '',
             oktato: '',
             checked: false,
-            langchecked: false
+            langchecked: false,
+            error: false,
+            succes: false
         }
         this.handleChange = this.handleChange.bind(this);
         this.handleLangChange = this.handleLangChange.bind(this);
-
-
     }
 
     componentDidMount() {
@@ -51,13 +51,19 @@ class PostForm extends Component {
                 targy: selectedTargy.SubjectEN,
             })
         }
+        this.setState({
+            succes:false,
+            error:false
+        })
         
         
     }
     SubmitChangeHandler2 = (teacherId) => {
         const selectedTeacher = this.props.teachernames.find(teacher => teacher._id === teacherId)
         this.setState({
-            oktato: selectedTeacher.TeacherName
+            oktato: selectedTeacher.TeacherName,
+            succes:false,
+            error:false
         })
     }
 
@@ -81,13 +87,17 @@ class PostForm extends Component {
         }
         }
         this.setState({
-            checked: !this.state.checked
+            checked: !this.state.checked,
+            succes:false,
+            error:false
         })
     }
 
     handleLangChange() {
         this.setState({
-            langchecked: !this.state.langchecked
+            langchecked: !this.state.langchecked,
+            succes:false,
+            error:false
         })
     }
 
@@ -97,10 +107,10 @@ class PostForm extends Component {
             axios.post('http://localhost:50111/api/posts', this.state)
                 .then(response => {
                     this.props.onPostSubmit(response.data)
-                    window.alert("Successful subject registration!")
+                    this.setState({succes : true, error:false})
                 })
                 .catch(error => {
-                    window.alert("This subject already exists!")
+                    this.setState({error : true, succes:false})
                 })
     }
 
@@ -119,7 +129,8 @@ class PostForm extends Component {
 
             : null;
 
-
+        const errorMessage = this.state.error ? <span className="error-mess">&#x2612; This subject already exist or the teacher name is not valid!</span> : null;
+        const succesMessage = this.state.succes ? <span className="succes-mess">&#9745; Success subject registration!</span> : null;
 
         const lang = this.state.langchecked
             ?
@@ -145,12 +156,12 @@ class PostForm extends Component {
             </li>
             ;
         return (
-
             <form onSubmit={this.SubmitHandler} className="formclass">
+                {errorMessage}
+                {succesMessage}
                 <ul className="flex-outer">
                     <li className="formli">
-                        <span>English subject:  <span className="paddinga"></span>
-                        <input
+                        <span>English subject: <input
                             type="checkbox"
                             className="CheckBoxUser"
                             checked={this.state.langchecked}
@@ -159,12 +170,12 @@ class PostForm extends Component {
                     {lang}
 
                     <li className="formli">
-                        <label>Teacher name: </label>
+                        <label>Teacher Name: </label>
                         <label>{oktato}</label>
                     </li>
                    
                     <li className="formli">
-                        <span>Different teacher: <span className="paddinga"></span> <input
+                        <span>Different teacher: <input
                             type="checkbox"
                             className="CheckBoxUser"
                             checked={this.state.checked}

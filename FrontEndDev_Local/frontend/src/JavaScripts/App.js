@@ -9,6 +9,7 @@ import AdminPage from './Admin/AdminPage';
 import DoctoralPrograms from './Admin/DoctoralPrograms';
 import Subjects from './Admin/Subjects';
 import TakenCourses from './User/TakenCourses';
+import Semester from './Admin/Semester';
 import AdminPageRegUser from './Admin/AdminPageRegUser';
 import AdminPageRegAdmin from './Admin/AdminPageRegAdmin';
 import Teachers from './Admin/Teacher';
@@ -41,6 +42,7 @@ function App() {
           <SecuredRouteAsAdmin path="/Teachers" component={Teachers} />
           <SecuredRouteAsAdmin path="/Users" component={AdminPage} />
           <SecuredRouteAsAdmin path="/Admins" component={Admins} />
+          <SecuredRouteAsAdmin path="/Semester" component={Semester} />
           <SecuredRouteAsAdmin path="/AdminProfile" component={AdminProfile} />
           <SecuredRouteAsUser path="/Home" component={Home} />           
           <SecuredRouteAsUser path="/TakenCourses" component={TakenCourses}/>

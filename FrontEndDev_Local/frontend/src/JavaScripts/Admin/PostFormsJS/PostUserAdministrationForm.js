@@ -17,7 +17,7 @@ class PostUserAdministration extends Component{
             coursetype:'',
             semester:'',
             programdirector:'',
-	    supervisorID:'',
+	        supervisorID:'',
             edit:false,
             delete:false,
             deletefirstname:'',
@@ -56,7 +56,7 @@ class PostUserAdministration extends Component{
             const selectedTeacher = this.props.teachernames.find(teacher => teacher._id === teacherId)
             this.setState({
                 supervisor: selectedTeacher.TeacherName,
-		supervisorID: selectedTeacher._id
+		        supervisorID: selectedTeacher._id
             })         
         }
 

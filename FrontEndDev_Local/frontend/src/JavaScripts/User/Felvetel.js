@@ -10,6 +10,7 @@ function Felvetel()  {
     fetchItems();
     fetchSubjectItems();
     fetchTeacherNames();
+    fetchDate();
   },[]);
   
   
@@ -17,18 +18,24 @@ function Felvetel()  {
   const [items,setItems] = useState([]);
   const [Subjectitems,setSubjectItems] = useState([]);
   const [Teachernames,setTeacherNames] = useState([]);
+  const [dates,setDates] = useState([]);
 
   const fetchItems = async () =>{
     const data = await fetch(
       'http://localhost:50111/api/posts/'+Userdata.GetUserID()
       
     );
-   
-
     const items = await data.json();    
     setItems(items);
-    
+  } ;
 
+  const fetchDate = async () =>{
+    const data = await fetch(
+      'http://localhost:50111/api/editsemester/'+Userdata.GetUserID()+'/getdates'
+    );
+    const dates = await data.json();    
+    setDates(dates);
+    console.log(dates)
   } ;
 
   const fetchSubjectItems = async () =>{
@@ -48,8 +55,6 @@ function Felvetel()  {
     );
     const Teachernames = await teachername.json();    
     setTeacherNames(Teachernames);
-   
-    
   };
 
   const handlePostSubmit = (person) => {
@@ -63,11 +68,10 @@ function Felvetel()  {
       <div className="targy">  
       <br/>
       <span className="info-titleuser">Subject registration</span>
+      <br/>  
+            { dates ? <div className="inputs">{Subjectitems.length > 0 && <PostForm onPostSubmit={handlePostSubmit} Subjectitems={Subjectitems} teachernames={Teachernames} items={items}/>} </div> 
+            : <span className="error-mess">&#x2612; No Subject Registration Period!</span>}
       <br/>
-          <div className="inputs">
-            {Subjectitems.length > 0 && <PostForm onPostSubmit={handlePostSubmit} Subjectitems={Subjectitems} teachernames={Teachernames} items={items}/>}
-          </div>
-         <br/>
       <div className="tables">
         
         <table className="content-table">

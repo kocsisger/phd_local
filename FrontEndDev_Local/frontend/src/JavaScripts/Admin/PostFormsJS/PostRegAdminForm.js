@@ -6,7 +6,7 @@ function refreshPage() {
     window.location.reload(false)
 }
 
-class PostRegUserForm extends Component{
+class PostRegAdminForm extends Component{
     constructor(props){
         super(props)
         this.state={
@@ -108,4 +108,4 @@ class PostRegUserForm extends Component{
     }
 }
 
-export default PostRegUserForm;
+export default PostRegAdminForm;
